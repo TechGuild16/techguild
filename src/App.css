@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
+/* Fullscreen black background */
+.app-container {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
+/* The initial black background */
+.loading-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  transition: opacity 2s ease-in-out;
+}
+
+.counter {
+  font-size: 50px;
+  color: white;
+  font-weight: bold;
+}
+
+/* Hide loading screen after the count finishes */
+.app-container.loading .loading-screen {
+  opacity: 1;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-container:not(.loading) .loading-screen {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Main content that appears after loading */
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards 2s;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+/* Fade-in animation for main content */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
   }
 }
